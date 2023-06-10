@@ -33,7 +33,7 @@ jobs:
       - name: Build application
         run: npm run build
 
-      - name: Deploy Holodex to GitHub Pages
+      - name: Deploy Portfolio to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
