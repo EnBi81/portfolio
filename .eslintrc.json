@@ -14,5 +14,8 @@
       "extends": ["plugin:@nx/javascript"],
       "rules": {}
     }
-  ]
+  ],
+  "rules": {
+    "no-var": "error"
+  }
 }
