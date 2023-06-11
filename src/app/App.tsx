@@ -1,43 +1,4 @@
-import dayjs, { Dayjs } from 'dayjs';
-
-interface ActivityPoint {
-  name: string;
-  dayjs: Dayjs;
-  url?: string | undefined;
-  description?: string | undefined;
-  tags?: string[] | undefined;
-}
-
-interface Activity {
-  color: `#${string}`;
-  start: ActivityPoint;
-  mid?: ActivityPoint[] | undefined;
-  end?: ActivityPoint | undefined;
-}
-
-interface PersonData {
-  name: string;
-  introduction: string;
-  activities: Activity[];
-}
-
-const personData: PersonData = {
-  name: 'Gergő Nádor',
-  introduction:
-    'an inspired guy bla bla bla lorem ipsum dolorez akupunktura csacsa\n' +
-    'an inspired guy bla bla bla lorem ipsum dolorez akupunktura csacsa\n' +
-    'an inspired guy bla bla bla lorem ipsum dolorez akupunktura csacsa\n' +
-    'an inspired guy bla bla bla lorem ipsum dolorez akupunktura csacsa\n' +
-    'an inspired guy bla bla bla lorem ipsum dolorez akupunktura csacsa\n' +
-    'an inspired guy bla bla bla lorem ipsum dolorez akupunktura csacsa',
-  activities: [
-    {
-      color: `#aaaaaa`,
-      start: { name: 'Starting Bachelor', dayjs: dayjs('2021.08.31') },
-      end: { name: 'Expected End Bachelor', dayjs: dayjs('2025.01.31') },
-    },
-  ],
-};
+import { personData } from '@portfolio/lib/model';
 
 export function App() {
   return (

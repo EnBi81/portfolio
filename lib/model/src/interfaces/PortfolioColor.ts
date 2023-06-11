@@ -1,1 +1,1 @@
-export type PortfolioColor = `#${string}`;
+export type PortfolioColor = string;

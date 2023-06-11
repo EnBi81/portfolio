@@ -1,14 +1,17 @@
 import { Skill } from '../interfaces/Skill';
-import CssImage from '../assets/css-big.svg';
 
 interface SkillSetInterface {
   css: Skill;
+  javascript: Skill;
 }
 
 export const SkillSet: SkillSetInterface = {
   css: {
     name: 'CSS',
-    image: CssImage,
-    color: `#111111`,
+    backgroundColor: '#264de4',
+  },
+  javascript: {
+    name: 'JavaScript',
+    backgroundColor: '#f0db4f',
   },
 };
