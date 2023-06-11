@@ -7,4 +7,4 @@ if "%~1"=="" (
 )
 
 REM Run the command with the argument
-nx g @nx/react:lib %1 --bundler=vite --directory=lib/%1 --minimal=true --style=css --unitTestRunner=jest
+nx g @nx/react:lib %1 --bundler=vite --directory=lib --minimal=true --style=css --unitTestRunner=jest
