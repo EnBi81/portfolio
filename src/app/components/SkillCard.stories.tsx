@@ -27,7 +27,7 @@ function SkillCardStory({
   );
 }
 
-const meta /*: Meta<typeof SkillCardStory>*/ = {
+const meta = {
   component: SkillCardStory,
   argTypes: {
     name: 'primary',
