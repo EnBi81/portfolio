@@ -12,6 +12,8 @@
     }
   ],
   "rules": {
-    "no-var": "error"
+    "no-var": "error",
+    "no-empty": "warn",
+    "no-empty-pattern": "warn"
   }
 }
