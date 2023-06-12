@@ -14,12 +14,15 @@ export const personData: PortfolioPersonData = {
   activities: [
     {
       color: `#aaaaaa`,
-      start: {
-        name: 'Starting Bachelor',
-        dayjs: dayjs('2021.08.31'),
-        skills: [SkillSet.css],
-      },
-      end: { name: 'Expected End Bachelor', dayjs: dayjs('2025.01.31') },
+      type: 'continuous',
+      activityPoints: [
+        {
+          name: 'Starting Bachelor',
+          dayjs: dayjs('2021.08.31'),
+          skills: [SkillSet.css],
+        },
+        { name: 'Expected End Bachelor', dayjs: dayjs('2025.01.31') },
+      ],
     },
   ],
 };
