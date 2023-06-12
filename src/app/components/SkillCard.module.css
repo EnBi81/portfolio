@@ -3,12 +3,12 @@
 
     max-width: max-content;
     cursor: pointer;
-
     transition: transform var(--transition-duration);
 }
 
-.container:hover{
+.container:hover, .container:focus{
     transform: translateY(-3px);
+    outline: none;
 }
 
 .container-inner{
@@ -25,7 +25,8 @@
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.38);
 }
 
-.container:hover .container-inner{
+.container:hover .container-inner,
+.container:focus .container-inner{
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.62);
 }
 
@@ -41,6 +42,7 @@
     transition: opacity var(--transition-duration);
 }
 
-.container:hover .container-bg{
+.container:hover .container-bg,
+.container:focus .container-bg{
     opacity: 70%;
 }

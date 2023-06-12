@@ -7,7 +7,7 @@ interface SkillCardProps {
 
 export function SkillCard({ skill }: SkillCardProps) {
   return (
-    <div className={skillCardStyles['container']}>
+    <div className={skillCardStyles['container']} tabIndex={0}>
       <div className={skillCardStyles['container-inner']}>
         <div
           className={skillCardStyles['container-bg']}
