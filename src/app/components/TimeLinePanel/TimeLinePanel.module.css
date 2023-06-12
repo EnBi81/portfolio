@@ -13,6 +13,16 @@
     display: contents;
 }
 
+.grid-full-row{
+    grid-column: 2 / -1;
+}
+
+.year-line-height-box{
+    --year-line-height: 1;
+
+    grid-row: span var(--year-line-height)
+}
+
 .single-point-track{
     --single-point-size: var(--main-point-size);
 
@@ -20,6 +30,4 @@
     width: var(--single-point-size);
     border-radius: var(--single-point-size);
     background: blue;
-
-
 }

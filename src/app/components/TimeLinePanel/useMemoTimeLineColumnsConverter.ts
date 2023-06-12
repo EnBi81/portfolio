@@ -2,12 +2,24 @@ import { TimeLineColumn } from './TimeLineColumn';
 import { useMemo } from 'react';
 import { Activity, ActivityPoint, ActivityType } from '@portfolio/lib/model';
 
+export interface ConvertedColumnType {
+  columnIndex: number;
+  activityPoint: ActivityPoint;
+  activityParent: Activity;
+  type: ActivityType;
+  activityPointType: 'first' | 'mid' | 'last';
+}
+
+interface YearDictionary {
+  [year: string]: ConvertedColumnType[];
+}
+
 /**
  * Hook that merges all the ActivityPoints into one array, from an array of TimeLineColumn
  * @param columns
  */
 export function useMemoTimeLineColumnsConverter(columns: TimeLineColumn[]) {
-  return useMemo(
+  const allActivityPoints = useMemo(
     () =>
       columns
         // discard the name of the column
@@ -24,15 +36,7 @@ export function useMemoTimeLineColumnsConverter(columns: TimeLineColumn[]) {
           []
         )
         // collect all the activity points into one list
-        .reduce<
-          {
-            columnIndex: number;
-            activityPoint: ActivityPoint;
-            activityParent: Activity;
-            type: ActivityType;
-            activityPointType: 'first' | 'mid' | 'last';
-          }[]
-        >(
+        .reduce<ConvertedColumnType[]>(
           (arr, currentValue) => [
             ...arr,
             ...currentValue.activity.activityPoints.map((activityPoint) => {
@@ -56,4 +60,21 @@ export function useMemoTimeLineColumnsConverter(columns: TimeLineColumn[]) {
         .sort((a, b) => a.activityPoint.dayjs.unix() - b.activityPoint.dayjs.unix()),
     [columns]
   );
+
+  const groupedByDate: YearDictionary = allActivityPoints.reduce((grouped, currentValue) => {
+    const year = currentValue.activityPoint.dayjs.year() + '';
+
+    if (grouped[year] === undefined) {
+      grouped[year] = [];
+    }
+
+    grouped[year].push(currentValue);
+
+    return grouped;
+  }, {});
+
+  return {
+    allActivityPoints,
+    groupedByDate,
+  };
 }

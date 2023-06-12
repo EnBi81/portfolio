@@ -1,25 +1,44 @@
 import timelineStyles from './TimeLinePanel.module.css';
-import { Activity, ActivityPoint, ActivityType, PortfolioColor } from '@portfolio/lib/model';
-import { useMemo } from 'react';
+import { ActivityPoint, PortfolioColor } from '@portfolio/lib/model';
 import { TimeLineColumn } from './TimeLineColumn';
 import { useMemoTimeLineColumnsConverter } from './useMemoTimeLineColumnsConverter';
+import { Dayjs } from 'dayjs';
+import React from 'react';
 
 export interface TimeLinePanelProps {
   columns: TimeLineColumn[];
 }
 
-export function TimeLinePanel({ columns }: TimeLinePanelProps) {
-  const allActivityPoints = useMemoTimeLineColumnsConverter(columns);
+function yearRange(from: Dayjs, to: Dayjs) {
+  const arr: string[] = [];
 
-  console.log('First: ' + allActivityPoints[0].activityPoint.dayjs.toString());
-  console.log('Last: ' + allActivityPoints[allActivityPoints.length - 1].activityPoint.dayjs.toString());
+  while (from.isBefore(to)) {
+    arr.push(from.year().toString());
+    from = from.add(1, 'year');
+  }
+  arr.push(from.year().toString());
+
+  return arr;
+}
+
+export function TimeLinePanel({ columns }: TimeLinePanelProps) {
+  const { allActivityPoints, groupedByDate } = useMemoTimeLineColumnsConverter(columns);
+
+  console.log(groupedByDate);
+  const firstDate = allActivityPoints[0].activityPoint.dayjs;
+  const lastDate = allActivityPoints[allActivityPoints.length - 1].activityPoint.dayjs;
 
   return (
     <div className={timelineStyles['timeline-panel']}>
       <div className={timelineStyles['timeline-panel-grid']}>
-        {/*  activityPoint={{ name: 'hello', dayjs: dayjs() }}
-          tracks={[{ color: '#f000', trackId: '1', type: 'singlePoint' }]}
-        />*/}
+        {yearRange(firstDate, lastDate).map((year) => (
+          <>
+            <YearDisplayRow year={year} lineCount={1} />
+            {groupedByDate[year]?.map((activityPoint) => (
+              <GridRow activityPoint={activityPoint.activityPoint} tracks={[]} />
+            ))}
+          </>
+        ))}
       </div>
     </div>
   );
@@ -49,4 +68,18 @@ function GridRow({ activityPoint, tracks }: GridRowProps) {
 
 function SinglePointTrackType() {
   return <div className={timelineStyles['single-point-track']}></div>;
+}
+
+function YearDisplayRow({ year, lineCount }: { year: string; lineCount: number }) {
+  return (
+    <div className={timelineStyles['grid-row']}>
+      <div
+        className={timelineStyles['year-line-height-box']}
+        style={{ '--year-line-height': lineCount } as React.CSSProperties}
+      >
+        {year}
+      </div>
+      <div className={timelineStyles['grid-full-row']}></div>
+    </div>
+  );
 }
