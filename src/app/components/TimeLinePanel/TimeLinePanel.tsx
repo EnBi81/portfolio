@@ -4,6 +4,7 @@ import { TimeLineColumn } from './TimeLineColumn';
 import { useMemoTimeLineColumnsConverter } from './useMemoTimeLineColumnsConverter';
 import { Dayjs } from 'dayjs';
 import React from 'react';
+import { TimeLineTrack, TimeLineTrackType } from './TimeLineTracks';
 
 export interface TimeLinePanelProps {
   columns: TimeLineColumn[];
@@ -30,12 +31,18 @@ export function TimeLinePanel({ columns }: TimeLinePanelProps) {
 
   return (
     <div className={timelineStyles['timeline-panel']}>
-      <div className={timelineStyles['timeline-panel-grid']}>
+      <div
+        className={timelineStyles['timeline-panel-grid']}
+        style={{ gridTemplateColumns: `max-content auto repeat(${columns.length}, 60px)` }}
+      >
         {yearRange(firstDate, lastDate).map((year) => (
           <>
-            <YearDisplayRow year={year} lineCount={1} />
+            <YearDisplayRow year={year} lineCount={groupedByDate[year]?.length + 1} rowCount={3 + columns.length} />
             {groupedByDate[year]?.map((activityPoint) => (
-              <GridRow activityPoint={activityPoint.activityPoint} tracks={[]} />
+              <GridRow
+                activityPoint={activityPoint.activityPoint}
+                tracks={[{ type: 'singlePoint', color: '#ff0000' }]}
+              />
             ))}
           </>
         ))}
@@ -44,42 +51,32 @@ export function TimeLinePanel({ columns }: TimeLinePanelProps) {
   );
 }
 
-type TimeLineTrackType = 'continuous' | 'startPoint' | 'midPoint' | 'endPoint' | 'singlePoint' | 'empty';
-
-interface TimeLineTrack {
+interface TimeLineTrackData {
   color: PortfolioColor;
-  trackId: string;
   type: TimeLineTrackType;
 }
 
 interface GridRowProps {
   activityPoint: ActivityPoint;
-  tracks: TimeLineTrack[];
+  tracks: TimeLineTrackData[];
 }
 
 function GridRow({ activityPoint, tracks }: GridRowProps) {
   return (
     <div className={timelineStyles['grid-row']}>
       <div>{activityPoint.name}</div>
-      <SinglePointTrackType />
+      {tracks.map((track) => (
+        <TimeLineTrack type={track.type} />
+      ))}
     </div>
   );
 }
 
-function SinglePointTrackType() {
-  return <div className={timelineStyles['single-point-track']}></div>;
-}
-
-function YearDisplayRow({ year, lineCount }: { year: string; lineCount: number }) {
+function YearDisplayRow({ year, lineCount, rowCount }: { year: string; lineCount: number; rowCount: number }) {
   return (
     <div className={timelineStyles['grid-row']}>
-      <div
-        className={timelineStyles['year-line-height-box']}
-        style={{ '--year-line-height': lineCount } as React.CSSProperties}
-      >
-        {year}
-      </div>
-      <div className={timelineStyles['grid-full-row']}></div>
+      <div style={{ gridRow: 'span ' + lineCount }}>{year}</div>
+      <div style={{ gridColumnStart: 2, gridColumnEnd: rowCount, color: 'transparent', userSelect: 'none' }}>a</div>
     </div>
   );
 }

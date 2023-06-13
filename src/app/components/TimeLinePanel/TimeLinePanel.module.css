@@ -6,7 +6,7 @@
 
 .timeline-panel-grid{
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: auto auto auto;
 }
 
 .grid-row{
@@ -15,12 +15,6 @@
 
 .grid-full-row{
     grid-column: 2 / -1;
-}
-
-.year-line-height-box{
-    --year-line-height: 1;
-
-    grid-row: span var(--year-line-height)
 }
 
 .single-point-track{

@@ -1,13 +1,12 @@
 import { personData } from '@portfolio/lib/model';
+import { TimeLinePanel } from './components/TimeLinePanel/TimeLinePanel';
 
 export function App() {
   return (
     <div className={'w-screen h-screen '}>
       <div className={'w-full h-full flex max-xl:flex-col'}>
         <div className={'xl:max-w-3xl'}>
-          <div className={'font-bold text-8xl max-sm:text-6xl'}>
-            {personData.name}
-          </div>
+          <div className={'font-bold text-8xl max-sm:text-6xl'}>{personData.name}</div>
           <br />
           <div>{personData.introduction}</div>
           <br />
@@ -20,7 +19,7 @@ export function App() {
             </div>
           </div>
         </div>
-        <div>th r</div>
+        <TimeLinePanel columns={[{ name: 'Education', data: personData.activities }]} />
       </div>
     </div>
   );
