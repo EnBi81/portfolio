@@ -17,12 +17,23 @@ export const personData: PortfolioPersonData = {
       type: 'continuous',
       activityPoints: [
         {
-          name: 'Starting Bachelor',
+          name: 'Software Engineering Bachelor',
           dayjs: dayjs('2021.08.31'),
+          location: 'VIA University College, Horsens',
           skills: [SkillSet.css],
-          description: '**B** ',
+          description: (
+            <span>
+              Starting <b>Software Engineering</b> studies at{' '}
+              <b>
+                <a href={'https://via.dk'}>VIA University College, Horsens</a>
+              </b>
+            </span>
+          ),
         },
-        { name: 'Expected End Bachelor', dayjs: dayjs('2025.01.31') },
+        {
+          name: 'Expected End Bachelor',
+          dayjs: dayjs('2025.01.31'),
+        },
       ],
     },
   ],

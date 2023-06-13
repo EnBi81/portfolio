@@ -1,11 +1,10 @@
 .timeline-panel{
     --main-point-size: 40px;
 
-    background: #dadada;
     height: 100%;
     width: 100%;
 
-    padding: 1rem
+    padding: 1rem;
 }
 
 .timeline-panel-grid{
@@ -29,13 +28,13 @@
 }
 
 .year-text{
-    font-size: 1.5rem;
+    font-size: 3rem;
     font-weight: 700;
-    opacity: 0.7;
+    opacity: 0.3;
 }
 
 .year-line-holder{
     color: transparent;
     user-select: none;
-    font-size: 1.5rem;
+    font-size: 3rem;
 }
