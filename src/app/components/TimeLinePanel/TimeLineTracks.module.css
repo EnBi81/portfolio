@@ -1,0 +1,8 @@
+.single-point-track{
+    --single-point-size: var(--main-point-size);
+
+    height: var(--single-point-size);
+    width: var(--single-point-size);
+    border-radius: var(--single-point-size);
+    background: blue;
+}

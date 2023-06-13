@@ -3,19 +3,20 @@ import { ActivityPoint, PortfolioColor } from '@portfolio/lib/model';
 import { TimeLineColumn } from './TimeLineColumn';
 import { useMemoTimeLineColumnsConverter } from './useMemoTimeLineColumnsConverter';
 import { Dayjs } from 'dayjs';
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import { TimeLineTrack, TimeLineTrackType } from './TimeLineTracks';
+import { ActivityPointBox } from './ActivityBox';
 
 export interface TimeLinePanelProps {
   columns: TimeLineColumn[];
 }
 
-function yearRange(from: Dayjs, to: Dayjs) {
+function yearRangeDesc(from: Dayjs, to: Dayjs) {
   const arr: string[] = [];
 
-  while (from.isBefore(to)) {
+  while (from.isAfter(to)) {
     arr.push(from.year().toString());
-    from = from.add(1, 'year');
+    from = from.subtract(1, 'year');
   }
   arr.push(from.year().toString());
 
@@ -25,7 +26,6 @@ function yearRange(from: Dayjs, to: Dayjs) {
 export function TimeLinePanel({ columns }: TimeLinePanelProps) {
   const { allActivityPoints, groupedByDate } = useMemoTimeLineColumnsConverter(columns);
 
-  console.log(groupedByDate);
   const firstDate = allActivityPoints[0].activityPoint.dayjs;
   const lastDate = allActivityPoints[allActivityPoints.length - 1].activityPoint.dayjs;
 
@@ -33,9 +33,9 @@ export function TimeLinePanel({ columns }: TimeLinePanelProps) {
     <div className={timelineStyles['timeline-panel']}>
       <div
         className={timelineStyles['timeline-panel-grid']}
-        style={{ gridTemplateColumns: `max-content auto repeat(${columns.length}, 60px)` }}
+        style={{ '--time-panel-columns': columns.length } as CSSProperties}
       >
-        {yearRange(firstDate, lastDate).map((year) => (
+        {yearRangeDesc(firstDate, lastDate).map((year) => (
           <>
             <YearDisplayRow year={year} lineCount={groupedByDate[year]?.length + 1} rowCount={3 + columns.length} />
             {groupedByDate[year]?.map((activityPoint) => (
@@ -64,7 +64,7 @@ interface GridRowProps {
 function GridRow({ activityPoint, tracks }: GridRowProps) {
   return (
     <div className={timelineStyles['grid-row']}>
-      <div>{activityPoint.name}</div>
+      <ActivityPointBox activityPoint={activityPoint} />
       {tracks.map((track) => (
         <TimeLineTrack type={track.type} />
       ))}
@@ -75,8 +75,12 @@ function GridRow({ activityPoint, tracks }: GridRowProps) {
 function YearDisplayRow({ year, lineCount, rowCount }: { year: string; lineCount: number; rowCount: number }) {
   return (
     <div className={timelineStyles['grid-row']}>
-      <div style={{ gridRow: 'span ' + lineCount }}>{year}</div>
-      <div style={{ gridColumnStart: 2, gridColumnEnd: rowCount, color: 'transparent', userSelect: 'none' }}>a</div>
+      <div style={{ gridRow: 'span ' + lineCount }} className={timelineStyles['year-text']}>
+        {year}
+      </div>
+      <div style={{ gridColumnStart: 2, gridColumnEnd: rowCount }} className={timelineStyles['year-line-holder']}>
+        a
+      </div>
     </div>
   );
 }

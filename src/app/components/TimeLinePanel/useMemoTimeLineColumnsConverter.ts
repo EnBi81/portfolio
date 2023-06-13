@@ -57,7 +57,7 @@ export function useMemoTimeLineColumnsConverter(columns: TimeLineColumn[]) {
           ],
           []
         )
-        .sort((a, b) => a.activityPoint.dayjs.unix() - b.activityPoint.dayjs.unix()),
+        .sort((a, b) => b.activityPoint.dayjs.unix() - a.activityPoint.dayjs.unix()),
     [columns]
   );
 

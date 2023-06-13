@@ -20,6 +20,7 @@ export const personData: PortfolioPersonData = {
           name: 'Starting Bachelor',
           dayjs: dayjs('2021.08.31'),
           skills: [SkillSet.css],
+          description: '**B** ',
         },
         { name: 'Expected End Bachelor', dayjs: dayjs('2025.01.31') },
       ],

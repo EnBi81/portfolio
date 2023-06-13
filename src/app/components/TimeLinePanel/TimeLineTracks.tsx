@@ -1,9 +1,20 @@
-import timelineStyles from './TimeLinePanel.module.css';
+import timelineStyles from './TimeLineTracks.module.css';
 import React from 'react';
 
 export type TimeLineTrackType = 'continuous' | 'startPoint' | 'midPoint' | 'endPoint' | 'singlePoint' | 'empty';
 
 export function TimeLineTrack({ type }: { type: TimeLineTrackType }) {
+  return (
+    <>
+      <div className={'hidden sm:block'}>
+        <TimeLineTrackInner type={type} />
+      </div>
+      <div className={'sm:hidden'}></div>
+    </>
+  );
+}
+
+function TimeLineTrackInner({ type }: { type: TimeLineTrackType }) {
   switch (type) {
     case 'singlePoint':
       return <SinglePointTrackType />;

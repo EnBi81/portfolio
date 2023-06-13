@@ -2,26 +2,40 @@
     --main-point-size: 40px;
 
     background: #dadada;
+    height: 100%;
+    width: 100%;
+
+    padding: 1rem
 }
 
 .timeline-panel-grid{
+    --time-panel-columns: 1;
+
     display: grid;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: max-content auto repeat(var(--time-panel-columns), 60px);
+}
+
+@media screen and (max-width: 639px) {
+    .timeline-panel-grid{
+        --time-panel-columns: 1;
+
+        display: grid;
+        grid-template-columns: max-content auto repeat(var(--time-panel-columns), 0);
+    }
 }
 
 .grid-row{
     display: contents;
 }
 
-.grid-full-row{
-    grid-column: 2 / -1;
+.year-text{
+    font-size: 1.5rem;
+    font-weight: 700;
+    opacity: 0.7;
 }
 
-.single-point-track{
-    --single-point-size: var(--main-point-size);
-
-    height: var(--single-point-size);
-    width: var(--single-point-size);
-    border-radius: var(--single-point-size);
-    background: blue;
+.year-line-holder{
+    color: transparent;
+    user-select: none;
+    font-size: 1.5rem;
 }
