@@ -6,8 +6,12 @@
     transition: transform var(--transition-duration);
 }
 
-.container:hover, .container:focus{
+.container:hover {
     transform: translateY(-3px);
+
+}
+
+.container:focus{
     outline: none;
 }
 
