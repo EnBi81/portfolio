@@ -4,8 +4,8 @@ import { TimeLineColumn } from './TimeLineColumn';
 import { useMemoTimeLineColumnsConverter } from './useMemoTimeLineColumnsConverter';
 import { Dayjs } from 'dayjs';
 import React, { CSSProperties } from 'react';
-import { TimeLineTrack, TimeLineTrackType } from './TimeLineTracks';
-import { ActivityPointBox } from './ActivityBox';
+import { TimeLineTrack, TimeLineTrackType } from './TimeLineTracks/TimeLineTracks';
+import { ActivityPointBox } from './ActivityBox/ActivityBox';
 
 export interface TimeLinePanelProps {
   columns: TimeLineColumn[];
@@ -64,7 +64,7 @@ interface GridRowProps {
 function GridRow({ activityPoint, tracks }: GridRowProps) {
   return (
     <div className={timelineStyles['grid-row']}>
-      <ActivityPointBox activityPoint={activityPoint} />
+      <ActivityPointBox activityPoint={activityPoint} color={'#ffffff'} />
       {tracks.map((track) => (
         <TimeLineTrack type={track.type} />
       ))}
