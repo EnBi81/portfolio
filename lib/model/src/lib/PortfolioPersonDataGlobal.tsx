@@ -13,6 +13,7 @@ export const personData: PortfolioPersonData = {
     'an inspired guy bla bla bla lorem ipsum dolorez akupunktura csacsa',
   activities: [
     {
+      name: 'VIA',
       color: `#aaaaaa`,
       type: 'continuous',
       activityPoints: [
@@ -33,6 +34,25 @@ export const personData: PortfolioPersonData = {
         {
           name: 'Expected End Bachelor',
           dayjs: dayjs('2025.01.31'),
+        },
+      ],
+    },
+    {
+      name: 'KLG',
+      color: '#ccaaaa',
+      type: 'continuous',
+      activityPoints: [
+        {
+          name: 'Higher school Education',
+          dayjs: dayjs('2015.05.01'),
+        },
+        {
+          name: 'A Competition',
+          dayjs: dayjs('2018.05.10'),
+        },
+        {
+          name: 'End of Higher school Education',
+          dayjs: dayjs('2021.05.01'),
         },
       ],
     },
